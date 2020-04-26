@@ -1,4 +1,4 @@
-# Title
+# You're a Wizard, Harry Plotter
 HarryPlotter is a simple plotting wizard that acts as a wrapper to python's matplotlib.
 
 It processes log files written in the following format: 
