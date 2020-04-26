@@ -24,11 +24,13 @@ def main():
     p['k = 5']['y'] = [float(i) for i in means['diablo_k5_powertwo'].values()]
     p['k = 5']['marker'] = "x"
     p["k = 5"]['label'] = "DIABLO (k = 5)"
+    p["k = 5"]['yerr'] = error["k = 5"]
 
     p['k = 10']['x'] = [float(i) for i in means['diablo_k10_powertwo'].keys()]
     p['k = 10']['y'] = [float(i) for i in means['diablo_k10_powertwo'].values()]
     p['k = 10']['marker'] = "o"
     p["k = 10"]['label'] = "DIABLO (k = 10)"
+    p["k = 5"]['yerr'] = error["k = 5"]
 
     g = defaultdict(dict)
     g["xlabel"] = "# of Nodes"
