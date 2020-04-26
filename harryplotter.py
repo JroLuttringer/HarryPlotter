@@ -26,12 +26,13 @@ def draw_plot(curve, data, graph_data):
         plt.plot(x,y, label=label,marker=marker,linewidth=linewidth)
 
     plt.title(graph_data.get("title", ""))
-    leg = plt.legend(loc="best", ncol = 1, fancybox = True)
-    leg.get_frame().set_alpha(0.5)
+    if data.get("legend", False):
+        leg = plt.legend(loc="best", ncol = 1, fancybox = True)
+        leg.get_frame().set_alpha(0.5)
     plt.ylabel(graph_data.get("ylabel", ""))
     plt.xlabel(graph_data.get("xlabel", ""))
-    plt.yscale(graph_data.get("xscale", "linear"))
-    plt.xscale(graph_data.get("yscale", "linear"))
+    plt.xscale(graph_data.get("xscale", "linear"))
+    plt.yscale(graph_data.get("yscale", "linear"))
 
 def draw_hist(curve, data, graph_data, start):
     print("hist")
@@ -47,13 +48,13 @@ def draw_hist(curve, data, graph_data, start):
     #leg.get_frame().set_alpha(0.5)
     plt.ylabel(graph_data.get("ylabel", ""))
     plt.xlabel(graph_data.get("xlabel", ""))
-    plt.yscale(graph_data.get("xscale", "linear"))
-    plt.xscale(graph_data.get("yscale", "linear"))
+    plt.xscale(graph_data.get("xscale", "linear"))
+    plt.yscale(graph_data.get("yscale", "linear"))
     #plt.xticks(pos, xtick)
     return len(y) + 2
 
-def horizontal_line(height, label):
-    x = [10, 1000]
+def horizontal_line(height, limit, label):
+    x = [0, limit]
     y = [height,height]
     plt.plot(x,y, '--',label=label, linewidth=2)
     plt.legend(loc="best", ncol = 1, fancybox = True)
@@ -68,6 +69,7 @@ def show_plot(curves_data, graph_data):
     all_ticks = []
     pos = []
     curr = 0
+    
     for curve, data in curves_data.items():
         if data.get("type") != "hist":
             draw_plot(curve, data, graph_data)
@@ -85,5 +87,8 @@ def show_plot(curves_data, graph_data):
     if data.get("type") == "hist":
         # print(all_tickes)
         plt.xticks(pos, all_ticks, fontsize=8)
-    plt.gcf().axes[0].yaxis.get_major_formatter().set_scientific(False)
+    if not graph_data.get("sci_not", False):
+        pass
+        #plt.ticklabel_format(style="plain")
+       	#plt.gcf().axes[0].yaxis.get_major_formatter().set_scientific(False)
     plt.show()
